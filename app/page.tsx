@@ -1,65 +1,72 @@
-import Image from "next/image";
+import Container from '@/components/Container';
+import LeaderBoardCard from '@/components/LeaderBoardCard';
+import CardTable from '@/components/CardTable';
+import { Target } from 'lucide-react';
+
+type Player = {
+  name: string;
+  games: number;
+  wins: number;
+  losses: number;
+  winPercent: string;
+};
+
+const tablePlayers: Player[] = [
+  { name: 'James', games: 30, wins: 20, losses: 10, winPercent: '67%' },
+  { name: 'Mike', games: 25, wins: 15, losses: 10, winPercent: '60%' },
+  { name: 'Alex', games: 20, wins: 12, losses: 8, winPercent: '60%' },
+];
+
+const columns = [
+  { key: 'name', label: 'Player' },
+  { key: 'games', label: 'Games Played' },
+  { key: 'wins', label: 'Wins' },
+  { key: 'losses', label: 'Losses' },
+  { key: 'winPercent', label: 'Win %' },
+] as const;
 
 export default function Home() {
+  const players = [
+    { id: '1', name: 'Alice', value: 15 },
+    { id: '2', name: 'Bob', value: 12 },
+    { id: '3', name: 'Charlie', value: 10 },
+    { id: '4', name: 'David', value: 8 },
+    { id: '5', name: 'Eve', value: 5 },
+  ];
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="py-6">
+      <Container>
+        <h4 className="text-xl font-semibold mb-6">
+          {' '}
+          <span className="bg-linear-to-r from-sky-400 via-skye-500 to-sky-600 bg-clip-text text-transparent font-bold">
+            Papawis
+          </span>{' '}
+          Leaderboards
+        </h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+          <LeaderBoardCard
+            variant="games"
+            title="Iron Man"
+            subtitle="Most Games Played"
+            players={players}
+          />
+          <LeaderBoardCard
+            variant="wins"
+            title="Champion"
+            subtitle="Most Wins"
+            players={players}
+          />
+          <LeaderBoardCard
+            variant="winPercentage"
+            title="Elite"
+            subtitle="Best Win Rate"
+            players={players}
+          />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div>
+          <CardTable />
         </div>
-      </main>
-    </div>
+      </Container>
+    </main>
   );
 }
