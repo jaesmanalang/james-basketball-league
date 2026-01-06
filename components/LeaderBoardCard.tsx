@@ -49,7 +49,7 @@ export default function LeaderBoardCard({
                     >
                       {idx + 1}
                     </GlassWrapper>
-                    <span className="text-white">{player.name}</span>
+                    <span className="text-white">{player.nickname}</span>
                   </div>
                   <span className="font-bold text-white">{player.value}</span>
                 </div>
